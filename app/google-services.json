@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "867269660767",
+    "firebase_url": "https://mobice-3ae9d.firebaseio.com",
+    "project_id": "mobice-3ae9d",
+    "storage_bucket": "mobice-3ae9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867269660767:android:b4736b3794dc8028cf4bea",
+        "android_client_info": {
+          "package_name": "com.example.mobice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867269660767-aacf5dn7u4bpkeu3j5vv42ih8i1bofql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYtXuUwLUi4C2emnaWAob9gKWwXM9Cp6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867269660767-aacf5dn7u4bpkeu3j5vv42ih8i1bofql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
