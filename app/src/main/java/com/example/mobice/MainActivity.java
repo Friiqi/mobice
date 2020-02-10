@@ -1,136 +1,107 @@
 package com.example.mobice;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.RequestQueue;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnLogin,btn2;
-    public String token2;
+    public Button btnLogin, btn2;
+    public String token2, uid;
     private RequestQueue requestQueue;
+    public ArrayList<String> keywords = new ArrayList<>();
+    public EditText teksti;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private TabItem infotab, maintab;
+    public PageAdapter pagerAdapter;
+    public static boolean background = false;
+
+
+    public JSONArray jar = new JSONArray();
+
+    public FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    public int keyWordCounter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        teksti = findViewById(R.id.txtInput);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        infotab = (TabItem) findViewById(R.id.infoTab);
+        maintab = (TabItem) findViewById(R.id.mainTab);
+        viewPager = findViewById(R.id.viewpager);
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,  new OnSuccessListener<InstanceIdResult>() {
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String token = instanceIdResult.getToken();
-                 token2 = instanceIdResult.getToken();
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0) {
+                    pagerAdapter.notifyDataSetChanged();
+                } else if (tab.getPosition() == 1) {
+                    pagerAdapter.notifyDataSetChanged();
+                } else if (tab.getPosition() == 2) {
+                    pagerAdapter.notifyDataSetChanged();
+                }
+            }
 
-                Log.d("MyFirebaseToken", token);
-               // volleyPost(token);
-            }});
-        btnLogin = findViewById(R.id.btnLogin);
-        btn2 =findViewById(R.id.btn2);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                openLogin();
+            public void onTabUnselected(TabLayout.Tab tab) {
 
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //sendMessage(token2);
-                String data = "{"+
-                        "\"token\"" + "\"" + token2 + "\","+
-
-                        "}";
-                //Submit(data);
-                //Submit(token2);
-
-
-            }
-        });
-
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (currentUser == null){
-            //btnLogin.setActivated(false);
-            openLogin();
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"user uid: " +currentUser.getUid(),Toast.LENGTH_LONG).show();
-        }
+//
+//        new Thread(new Runnable() {
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        if (background) {
+//                            Toast.makeText(mainTab.getCont(), "onnistuin!", Toast.LENGTH_LONG).show();
+//                            Log.d("foreground", mainTab.getCont().toString());
+//                        }
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//            }
+//            //do something
+//        }
+//    }).start();
     }
 
-    public void openLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    public static void toaster(Context mcont, String message) {
+        Toast.makeText(mcont, message, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
-//    private void Submit(String data)
-//    {
-//        final String savedata= data;
-//        String URL="http://o202.nor.fi:3000/"+data;
-//
-//        requestQueue = Volley.newRequestQueue(getApplicationContext());
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//                    JSONObject objres=new JSONObject(response);
-//                    Toast.makeText(getApplicationContext(),objres.toString(),Toast.LENGTH_LONG).show();
-//
-//
-//                } catch (JSONException e) {
-//                    Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
-//
-//                }
-//                //Log.i("VOLLEY", response);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                //Log.v("VOLLEY", error.toString());
-//            }
-//        }) {
-//            @Override
-//            public String getBodyContentType() {
-//                return "application/json; charset=utf-8";
-//            }
-//
-//            @Override
-//            public byte[] getBody() throws AuthFailureError {
-//                try {
-//                    return savedata == null ? null : savedata.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    //Log.v("Unsupported Encoding while trying to get the bytes", data);
-//                    return null;
-//                }
-//            }
-//
-//        };
-//        requestQueue.add(stringRequest);
-//    }
-
 
 }
+
+
+
 
 
 

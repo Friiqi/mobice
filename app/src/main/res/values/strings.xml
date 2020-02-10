@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MobIce</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="mainTab">Keywords</string>
+
+    <string name="infoTab">Information</string>
+
+
 </resources>

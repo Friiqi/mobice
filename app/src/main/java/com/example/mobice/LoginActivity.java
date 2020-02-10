@@ -67,6 +67,10 @@ public class LoginActivity extends AppCompatActivity {
         // [END auth_fui_create_intent]
 
     }
+    public void openMain(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void getTokens() {
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -96,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                             try {
                                                 volleyPost(token, idToken);
+                                                openMain();
+
                                             } catch (AuthFailureError authFailureError) {
                                                 authFailureError.printStackTrace();
                                                 Toast.makeText(getApplicationContext(),"error sending userIdToken",Toast.LENGTH_LONG).show();
@@ -155,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             //if i want i could send register token in body as well, but then i would need to handle it in backend (they end up in same file)
             //obj.put("regToken", regtoken);
             Log.d("idToken", obj.toString());
+            Log.d("regToken: ", regtoken);
         } catch (JSONException e) {
             e.printStackTrace();
         }
