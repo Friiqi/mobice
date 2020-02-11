@@ -3,6 +3,7 @@ package com.example.mobice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -69,7 +74,9 @@ public class mainTab extends Fragment implements View.OnClickListener {
         btnLogin.setOnClickListener(this);
         btnAddKeywords.setOnClickListener(this);
         btnSendKeywords.setOnClickListener(this);
-
+        if (currentUser == null) {
+            openLogin(v);
+        }
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
@@ -124,7 +131,7 @@ public class mainTab extends Fragment implements View.OnClickListener {
 
         String url = "http://o202.nor.fi:8080/"; // <----enter your post url here
 
-
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(v.getContext());
 
         final String requestBody = jar.toString();
 
@@ -134,14 +141,9 @@ public class mainTab extends Fragment implements View.OnClickListener {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-
-                        // Process the JSON
-
-
+                        Log.d("jsontest resp", response.toString());
                     }
+
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -149,8 +151,10 @@ public class mainTab extends Fragment implements View.OnClickListener {
                         // Do something when error occurred
                         //Toast.makeText(getApplicationContext(),"error ",Toast.LENGTH_LONG).show();
                         Log.d("ERR: ", String.valueOf(error));
+                        Log.d("jsontest resp err", error.toString());
                     }
-                }) {
+                })
+        {
             @Override
             public byte[] getBody() {
                 try {
@@ -162,21 +166,45 @@ public class mainTab extends Fragment implements View.OnClickListener {
                     return null;
                 }
             }
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String jsonString = new String(response.data,
+                            HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+
+                    JSONObject result = null;
+                    JSONArray resArray ;
+
+                    if (jsonString != null && jsonString.length() > 0)
+                        result = new JSONObject(jsonString);
+                        resArray = new JSONArray(result);
+
+                    return Response.success(resArray,
+                            HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    return Response.error(new ParseError(e));
+                } catch (JSONException je) {
+                    return Response.error(new ParseError(je));
+                }
+            }
         };
 
         //Log.d("body: ", MyStringRequest.getBody().toString());
         String testi = new String(jarRequest.getBody());
-        Log.d("jsontesti lopussa", testi);
+       Log.d("jsontesti lopussa", testi);
         //Log.d("jsontesti", )
         //Log.d("bodytesti2: ", testi);
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(getActivity());
+
         MyRequestQueue.add(jarRequest);
-        jar = new JSONArray();
+
         Toast.makeText(getActivity(), "Keywords sent!", Toast.LENGTH_LONG).show();
+        jar = new JSONArray();
 
 
 
     }
+
 
 
     @Override
