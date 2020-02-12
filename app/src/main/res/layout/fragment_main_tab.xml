@@ -4,74 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="100"
     android:orientation="vertical"
+
     tools:context=".mainTab">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="117dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="28dp"
-        android:text="Switch user"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
 
     <Button
         android:id="@+id/btnAddKeywords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add keyword"
+
+
+        android:text="Add "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.653" />
 
     <Button
         android:id="@+id/btnSendKeywords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send keywords"
+
+        android:text="@string/fui_button_text_send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.886"
+
+        app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.653" />
 
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="117dp"
+        android:layout_height="55dp"
+
+
+        android:text="Switch user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.813" />
 
     <TextView
         android:id="@+id/txtInfo"
-        android:layout_width="307dp"
-        android:layout_height="149dp"
-        android:layout_marginBottom="316dp"
-        android:text='Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search parameter. Press "Add keyword" after a keyword you insert, and when you have inserted all of them, send to server with "Send keywords". (you need to press it twice for it to include the latest, will fix in time!)'
+        android:layout_width="257dp"
+        android:layout_height="142dp"
+
+        android:text='Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search parameter. Press "Add keyword" after a keyword you insert, and when you have inserted all of them, send to server with "Send keywords". '
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tablayout"
-        app:layout_constraintVertical_bias="0.766" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.178" />
 
     <EditText
         android:id="@+id/txtInput"
-        android:layout_width="306dp"
-        android:layout_height="59dp"
+        android:layout_width="264dp"
+        android:layout_height="50dp"
+
         android:ems="10"
         android:hint="Add keyword/s here."
         android:inputType="text"
         android:selectAllOnFocus="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

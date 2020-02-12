@@ -21,6 +21,7 @@
         android:singleLine="false"
         android:text="This is a test phase.  After matching process is done (script launch is done manually at this phase), you will receive a notification for possible matches in last ahab+ channel, if any come up. Currently the notification only comes if app is in background. Ahab+ channel is used temporarily instead of sales."
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +35,7 @@
         android:inputType="textPersonName"
         android:text="FUNCTION BEFORE FORM ^^"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInfo2" />

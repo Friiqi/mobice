@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TabItem infotab, maintab;
     public PageAdapter pagerAdapter;
     public static boolean background = false;
-
+    public static ActionBar actionBar;
 
     public JSONArray jar = new JSONArray();
 
@@ -48,8 +49,20 @@ public class MainActivity extends AppCompatActivity {
         maintab = (TabItem) findViewById(R.id.mainTab);
         viewPager = findViewById(R.id.viewpager);
 
+
+
+         actionBar = getSupportActionBar(); // or getActionBar();
+
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.abs_layout);
+
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
+
+
+
+
+
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

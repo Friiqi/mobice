@@ -1,6 +1,7 @@
 package com.example.mobice;
 
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -45,7 +45,9 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class mainTab extends Fragment implements View.OnClickListener {
-
+    private static final String REQUESTTAG = "Mobice" ;
+    private RequestQueue MyRequestQueue;
+    private JsonArrayRequest jarRequest;
     public String token2, uid;
     private RequestQueue requestQueue;
     public ArrayList<String> keywords = new ArrayList<>();
@@ -55,7 +57,8 @@ public class mainTab extends Fragment implements View.OnClickListener {
     public FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     public int keyWordCounter = 0;
     public static Context conte ;
-
+    private String testi;
+    public ActionBar actionBar;
     public mainTab() {
         // Required empty public constructor
     }
@@ -74,6 +77,9 @@ public class mainTab extends Fragment implements View.OnClickListener {
         btnLogin.setOnClickListener(this);
         btnAddKeywords.setOnClickListener(this);
         btnSendKeywords.setOnClickListener(this);
+
+
+
         if (currentUser == null) {
             openLogin(v);
         }
@@ -115,7 +121,7 @@ public class mainTab extends Fragment implements View.OnClickListener {
             Log.d(uid, inputTxt);
             teksti.getText().clear();
             jar.put(obj);
-            keyWordCounter ++;
+
             Log.d("jsontesti: ", inputTxt  );
 
 
@@ -127,21 +133,21 @@ public class mainTab extends Fragment implements View.OnClickListener {
 
 
 
-    public void volleyPost(View v) throws AuthFailureError, JSONException {
+    public void volleyPost(View v) throws JSONException {
 
         String url = "http://o202.nor.fi:8080/"; // <----enter your post url here
 
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(v.getContext());
+         MyRequestQueue = Volley.newRequestQueue(v.getContext());
 
         final String requestBody = jar.toString();
 
-        JsonArrayRequest jarRequest = new JsonArrayRequest(
+         jarRequest = new JsonArrayRequest(
                 Request.Method.POST,
                 url, jar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("jsontest resp", response.toString());
+                        //Log.d("jsontest resp", response.toString());
                     }
 
                 },
@@ -171,41 +177,44 @@ public class mainTab extends Fragment implements View.OnClickListener {
             protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
                 try {
                     String jsonString = new String(response.data,
-                            HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+                            "UTF-8");
+//HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET)
 
-                    JSONObject result = null;
-                    JSONArray resArray ;
 
-                    if (jsonString != null && jsonString.length() > 0)
-                        result = new JSONObject(jsonString);
-                        resArray = new JSONArray(result);
+                    if (jsonString == null || jsonString.length() == 0)
 
-                    return Response.success(resArray,
-                            HttpHeaderParser.parseCacheHeaders(response));
+
+                        return Response.success(null,
+
+                                HttpHeaderParser.parseCacheHeaders(response));
                 } catch (UnsupportedEncodingException e) {
+                    Log.d("jsontest err1", e.toString());
                     return Response.error(new ParseError(e));
-                } catch (JSONException je) {
-                    return Response.error(new ParseError(je));
                 }
+                return super.parseNetworkResponse(response);
             }
         };
 
         //Log.d("body: ", MyStringRequest.getBody().toString());
-        String testi = new String(jarRequest.getBody());
-       Log.d("jsontesti lopussa", testi);
+         testi = new String(jarRequest.getBody());
+       //Log.d("jsontesti lopussa", testi);
         //Log.d("jsontesti", )
         //Log.d("bodytesti2: ", testi);
-
+        jarRequest.setTag(REQUESTTAG);
         MyRequestQueue.add(jarRequest);
 
         Toast.makeText(getActivity(), "Keywords sent!", Toast.LENGTH_LONG).show();
         jar = new JSONArray();
 
-
-
     }
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (MyRequestQueue != null){
+                MyRequestQueue.cancelAll(REQUESTTAG);
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -214,13 +223,15 @@ public class mainTab extends Fragment implements View.OnClickListener {
                 openLogin(v.getRootView());
                 break;
             case R.id.btnAddKeywords:
+                Log.d("jsontest add", "kek");
                 addKeywords(v.getRootView());
                 break;
             case R.id.btnSendKeywords:
                 try {
+
                     volleyPost(v.getRootView());
-                } catch (AuthFailureError authFailureError) {
-                    authFailureError.printStackTrace();
+                    Log.d("jsontest vol", testi);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
