@@ -10,29 +10,26 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class infoTab extends Fragment {
-    public EditText infoText;
+public class telnetTab extends Fragment {
 
+    private EditText txtTelnet;
+    public telnetClient tClient;
 
-    public infoTab() {
+    public telnetTab() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_info_tab,
+        tClient = new telnetClient();
+        View v = inflater.inflate(R.layout.fragment_telnet_tab,
                 container, false);
-
-        infoText = (EditText) v.findViewById(R.id.txtInfo2);
+        txtTelnet = v.findViewById(R.id.txtTelnet);
+    // ei pysty fragmentin sisällä avaamaan vaan pitäs olla oma classi joka näytetään vaan fragmentissa?
+    //        tClient.doInBackground();
+        // Inflate the layout for this fragment
         return v;
     }
-
-
 
 }

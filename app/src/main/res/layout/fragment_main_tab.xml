@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/fui_button_text_send"
+        android:text="Send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -59,7 +59,7 @@
         android:layout_width="257dp"
         android:layout_height="142dp"
 
-        android:text='Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search parameter. Press "Add keyword" after a keyword you insert, and when you have inserted all of them, send to server with "Send keywords". '
+        android:text='Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search parameter. Press "Add" after a keyword you insert, and when you have inserted all of them, send to server with "Send ". '
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"

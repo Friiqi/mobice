@@ -16,9 +16,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#06adcf"
-
-        >
+        android:background="#06adcf">
 
 
         <com.google.android.material.tabs.TabItem
@@ -32,6 +30,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/infoTab" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/telnetTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="telnetTab" />
+
+
 
 
     </com.google.android.material.tabs.TabLayout>

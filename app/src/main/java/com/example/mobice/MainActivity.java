@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText teksti;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TabItem infotab, maintab;
+    private TabItem infotab, maintab,telnetTab;
     public PageAdapter pagerAdapter;
     public static boolean background = false;
     public static ActionBar actionBar;
@@ -37,25 +37,27 @@ public class MainActivity extends AppCompatActivity {
     public JSONArray jar = new JSONArray();
 
     public FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    public int keyWordCounter = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         teksti = findViewById(R.id.txtInput);
+        viewPager = findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         infotab = (TabItem) findViewById(R.id.infoTab);
         maintab = (TabItem) findViewById(R.id.mainTab);
-        viewPager = findViewById(R.id.viewpager);
+        telnetTab = (TabItem) findViewById(R.id.telnetTab);
 
 
 
-         actionBar = getSupportActionBar(); // or getActionBar();
 
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.abs_layout);
-
+//         actionBar = getSupportActionBar(); // or getActionBar();
+//
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        actionBar.setCustomView(R.layout.abs_layout);
+        viewPager.setOffscreenPageLimit(3);
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if (tab.getPosition() == 2) {
                     pagerAdapter.notifyDataSetChanged();
                 }
+
+
             }
 
             @Override
