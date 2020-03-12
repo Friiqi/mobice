@@ -59,7 +59,7 @@
         android:layout_width="257dp"
         android:layout_height="142dp"
 
-        android:text='Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search parameter. Press "Add" after a keyword you insert, and when you have inserted all of them, send to server with "Send ". '
+        android:text='@string/quick_info'
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"

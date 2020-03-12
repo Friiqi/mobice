@@ -19,25 +19,13 @@
         android:inputType="textMultiLine"
         android:selectAllOnFocus="false"
         android:singleLine="false"
-        android:text="This is a test phase.  After matching process is done (script launch is done manually at this phase), you will receive a notification for possible matches in last ahab+ channel, if any come up. Currently the notification only comes if app is in background. Ahab+ channel is used temporarily instead of sales."
-        android:textSize="18sp"
+        android:text="@string/app_info"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="330dp"
-        android:layout_height="83dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="FUNCTION BEFORE FORM ^^"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
