@@ -4,9 +4,11 @@
     <string name="mainTab">Keywords</string>
 
     <string name="infoTab">Information</string>
-
-
-    <string name="telnetTab">Telnet </string>
+    <string name="app_info">This is a work in progress. The goal is to have a functional notification system from Sales-channel, and in time add more properties and
+    functionalities to this app, such as notifying the user if their locker is about to expire. DO NOT USE YOUR INGAME CREDENTIALS, as this app is not tied to those.</string>
+    <string name="quick_info">Insert your keywords below. You can use multiple words in one keyword, for example "Painful Maul of Apocalypse" would be considered one search
+        parameter. Press "Add" after a keyword you insert, and when you have inserted all of them, send to server with "Send".</string>
+    <string name="telnetTab">Telnet</string>
 
 
 </resources>
