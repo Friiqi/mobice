@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoActivity">
+
+    <EditText
+        android:id="@+id/txtInfo2"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:layout_width="315dp"
+        android:layout_height="293dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:inputType="textMultiLine"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:text="This is a test phase.  After matching process is done (script launch is done manually at this phase), you will receive a notification for possible matches in last ahab+ channel, if any come up. Currently the notification only comes if app is in background. Ahab+ channel is used temporarily instead of sales."
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="330dp"
+        android:layout_height="83dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="FUNCTION BEFORE FORM ^^"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInfo2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

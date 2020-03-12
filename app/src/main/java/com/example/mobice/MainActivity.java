@@ -1,94 +1,133 @@
 package com.example.mobice;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.iid.InstanceIdResult;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.os.Build;
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.android.volley.RequestQueue;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnLogin;
+    public Button btnLogin, btn2;
+    public String token2, uid;
+    private RequestQueue requestQueue;
+    public ArrayList<String> keywords = new ArrayList<>();
+    public EditText teksti;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private TabItem infotab, maintab,telnetTab;
+    public PageAdapter pagerAdapter;
+    public static boolean background = false;
+    public static ActionBar actionBar;
+
+    public JSONArray jar = new JSONArray();
+
+    public FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        teksti = findViewById(R.id.txtInput);
+        viewPager = findViewById(R.id.viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        infotab = (TabItem) findViewById(R.id.infoTab);
+        maintab = (TabItem) findViewById(R.id.mainTab);
+        telnetTab = (TabItem) findViewById(R.id.telnetTab);
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,  new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String token = instanceIdResult.getToken();
-                Log.d("MyFirebaseToken", token);
 
-            }});
-        btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+
+//         actionBar = getSupportActionBar(); // or getActionBar();
+//
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        actionBar.setCustomView(R.layout.abs_layout);
+        viewPager.setOffscreenPageLimit(3);
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+
+
+
+
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View view) {
-                openLogin();
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0) {
+                    pagerAdapter.notifyDataSetChanged();
+                } else if (tab.getPosition() == 1) {
+                    pagerAdapter.notifyDataSetChanged();
+                } else if (tab.getPosition() == 2) {
+                    pagerAdapter.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null){
-            btnLogin.setActivated(false);
-        }
+//
+//        new Thread(new Runnable() {
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        if (background) {
+//                            Toast.makeText(mainTab.getCont(), "onnistuin!", Toast.LENGTH_LONG).show();
+//                            Log.d("foreground", mainTab.getCont().toString());
+//                        }
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//            }
+//            //do something
+//        }
+//    }).start();
     }
 
-    public void openLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    public static void toaster(Context mcont, String message) {
+        Toast.makeText(mcont, message, Toast.LENGTH_SHORT).show();
     }
 
-/*
-    public void getToken(View v) {
-        // Get token
-        // [START retrieve_current_token]
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
-
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        sendRegistrationToServer(token);
-    }*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
