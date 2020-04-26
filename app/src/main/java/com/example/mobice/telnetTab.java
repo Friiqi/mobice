@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 public class telnetTab extends Fragment {
     private String tempString;
     public  EditText txtTelnet;
-    public telnetClient tClient;
+    //public telnetClient tClient;
     public static String telString;
     public telnetTab() {
         // Required empty public constructor
@@ -22,16 +22,20 @@ public class telnetTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        tClient = new telnetClient();
+        //tClient = new telnetClient();
         View v = inflater.inflate(R.layout.fragment_telnet_tab,
                 container, false);
         txtTelnet = v.findViewById(R.id.txtTelnet);
         txtTelnet.setText("under construction");
+        //mmmmmmm
        // tClient.openSocket();
-        //mud();
+
         //txtTelnet.setText(telString, EditText.BufferType.EDITABLE);
     // ei pysty fragmentin sisällä avaamaan vaan pitäs olla oma classi joka näytetään vaan fragmentissa?
-    //        tClient.doInBackground();
+           //tClient.doInBackground();
+
+
+        //telnetClient.openSocket() on tänhetkinen toimiva tapa yhistää mudiin
 
         //tClient.openSocket();
         // Inflate the layout for this fragment
@@ -49,7 +53,7 @@ public class telnetTab extends Fragment {
 //             }
 //             tempString = telString;
 //             telString = tClient.str;
-//             //txtTelnet.setText("testi: "+ telString, EditText.BufferType.EDITABLE);
+//             txtTelnet.setText("testi: "+ telString, EditText.BufferType.EDITABLE);
 //         }
 //         });
 //     }

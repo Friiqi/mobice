@@ -20,11 +20,11 @@ public class telnetClient extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... strings) {
 
-//        new Thread(new Runnable() {
-//            public void run() {
-//                //open socket
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+           public void run() {
+               //open socket
+           }
+       }).start();
        return null;
 }
 

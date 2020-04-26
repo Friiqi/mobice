@@ -26,6 +26,8 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return new infoTab();
             case 2:
+                return new matchTab();
+            case 3:
                 return new telnetTab();
              default:
                  return null;
