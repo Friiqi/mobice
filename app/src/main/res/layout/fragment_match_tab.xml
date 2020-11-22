@@ -7,7 +7,7 @@
     tools:context=".telnetTab">
 
     <EditText
-        android:id="@+id/txtTelnet"
+        android:id="@+id/txtMatchTab"
         android:layout_width="384dp"
         android:layout_height="304dp"
         android:autoText="false"
@@ -17,9 +17,21 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.557" />
+        app:layout_constraintVertical_bias="0.576" />
+
+    <TextView
+        android:id="@+id/txtRecentMatches"
+        android:layout_width="265dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="165dp"
+        android:text="Recent matches"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

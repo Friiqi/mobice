@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText teksti;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TabItem infotab, maintab,telnetTab;
+    private TabItem infotab, maintab,telnetTab,matchTab;
     public PageAdapter pagerAdapter;
     public static boolean background = false;
     public static ActionBar actionBar;
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         infotab = (TabItem) findViewById(R.id.infoTab);
         maintab = (TabItem) findViewById(R.id.mainTab);
         telnetTab = (TabItem) findViewById(R.id.telnetTab);
+        matchTab = findViewById(R.id.matchTab);
 
 
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 //        actionBar.setCustomView(R.layout.abs_layout);
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(4);
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
@@ -76,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
                     pagerAdapter.notifyDataSetChanged();
                 } else if (tab.getPosition() == 2) {
                     pagerAdapter.notifyDataSetChanged();
+                } else if (tab.getPosition() == 3) {
+                    pagerAdapter.notifyDataSetChanged();
                 }
-
 
             }
 
